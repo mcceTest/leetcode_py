@@ -1,1 +1,1 @@
-# leetcode_py
+leetcode exercise in python
