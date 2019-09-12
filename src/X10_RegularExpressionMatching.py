@@ -79,8 +79,11 @@ class Solution:
                             if dp[j][i+2]:
                                 dp[j][i] = True
                             else:
+                                # TODO: optimized
                                 for k in range(j, sLen):
-                                    if s[k] == repeatCur and dp[k+1][i+2]:
+                                    if s[k] != repeatCur:
+                                        break
+                                    elif dp[k+1][i+2]:
                                         dp[j][i] = True
                                         break
             elif pCur == '.':
@@ -106,13 +109,13 @@ class Solution:
     def main():
         sol = Solution()
 
-        # print(sol.isMatch("aa", "a"))
+        print(sol.isMatch("aa", "a"))
 
-        # print(sol.isMatch("aa", "a*"))
+        print(sol.isMatch("aa", "a*"))
 
-        # print(sol.isMatch("ab", ".*"))
+        print(sol.isMatch("ab", ".*"))
 
-        # print(sol.isMatch("aab", "c*a*b"))
+        print(sol.isMatch("aab", "c*a*b"))
 
         print(sol.isMatch("mississippi", "mis*is*p*."))
 
