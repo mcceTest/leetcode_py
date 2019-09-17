@@ -31,3 +31,12 @@ class ListNode(object):
             cur = cur.next
 
         return cur is None    
+
+
+    def __str__(self):
+        cur = self
+        values = []
+        while cur is not None:
+            values.append(cur.val)
+            cur = cur.next
+        return '->'.join(map(lambda x: str(x), values))
