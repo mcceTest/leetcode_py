@@ -40,3 +40,7 @@ class ListNode(object):
             values.append(cur.val)
             cur = cur.next
         return '->'.join(map(lambda x: str(x), values))
+
+    
+    def __lt__(self, other):
+        return self.val < other.val

@@ -8,8 +8,6 @@ class TestSum(unittest.TestCase):
     def test1(self):
         sol = Solution()
 
-        sol = Solution()
-
         l1 = ListNode.constructFromList([1, 2, 4])
         l2 = ListNode.constructFromList([1, 3, 4])
 
@@ -20,9 +18,7 @@ class TestSum(unittest.TestCase):
 
     def test2(self):
         sol = Solution()
-
-        sol = Solution()
-
+        
         l1 = ListNode.constructFromList([])
         l2 = ListNode.constructFromList([1, 3, 4])
 
