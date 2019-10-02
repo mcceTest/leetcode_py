@@ -48,7 +48,7 @@ class Solution(object):
                     return True
             else:
                 return True
-
+        board[x][y] = '.'
         return False
 
 
