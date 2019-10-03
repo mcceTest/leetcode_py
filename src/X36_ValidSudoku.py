@@ -61,8 +61,8 @@ class Solution(object):
             if not self.rowsValid(i, board): return False
             if not self.colsValid(i, board): return False
 
-        for i in range(0, 9, 3):
-            for j in range(0, 9, 3):
+        for i in range(3):
+            for j in range(3):
                 if not self.cubeValid(i, j, board): return False
 
         return True
@@ -82,7 +82,7 @@ class Solution(object):
         nums = []
         for i in range(3):
             for j in range(3):
-                cur = board[cubex + i][cubey + j]
+                cur = board[cubex * 3 + i][cubey * 3 + j]
                 if cur != '.': nums.append(cur)
         return len(nums) == len(set(nums))
 

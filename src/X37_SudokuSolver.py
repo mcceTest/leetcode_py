@@ -21,6 +21,7 @@ You may assume that the given Sudoku puzzle will have a single unique solution.
 The given board size is always 9x9.
 '''
 
+## TODO: when check validity, only need to compare the value of the cell with the others
 from pprint import pprint as pp
 class Solution(object):
     def solveSudoku(self, board):
@@ -48,7 +49,9 @@ class Solution(object):
                     return True
             else:
                 return True
+
         board[x][y] = '.'
+        
         return False
 
 
@@ -81,7 +84,7 @@ class Solution(object):
         nums = []
         for i in range(3):
             for j in range(3):
-                cur = board[cubex + i][cubey + j]
+                cur = board[cubex * 3 + i][cubey * 3 + j]
                 if cur != '.': nums.append(cur)
         return len(nums) == len(set(nums))
 
