@@ -1,4 +1,4 @@
 settings.json
 launch.json
 .env
-__pycache__/*
+src/__pycache__/*
