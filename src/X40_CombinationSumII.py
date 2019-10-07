@@ -35,4 +35,50 @@ class Solution(object):
         :type target: int
         :rtype: List[List[int]]
         """
+        if not candidates:
+            return []
+
+        res = []
+        curRes = []
+
+        candidates.sort()
+
+        # dfs search of the possible state space
+        self.dfs(candidates, target, -1, 0, curRes, res)
+
+        return res
+
         
+    def dfs(self, candidates, target, idx, curTotal, curRes, res):
+        if curTotal == target:
+            res.append(curRes[:])
+            return
+
+        if idx >= len(candidates):
+            return
+
+        curIdx = idx + 1
+        while curIdx < len(candidates):
+            if curTotal + candidates[curIdx] <= target:
+                curRes.append(candidates[curIdx])
+                self.dfs(candidates, target, curIdx, curTotal + candidates[curIdx], curRes, res)
+                curRes.pop(-1)
+            else:
+                break
+            
+            curIdx += 1
+            while curIdx < len(candidates) and candidates[curIdx - 1] == candidates[curIdx]:
+                curIdx += 1
+
+    @staticmethod
+    def main():
+        sol = Solution()
+
+        candidates = [2,3,6,7]
+        target = 7
+
+        print(sol.combinationSum2(candidates, target))
+        
+
+if __name__ == "__main__":
+    Solution.main()  
