@@ -23,4 +23,46 @@ class Solution(object):
         :type newInterval: List[int]
         :rtype: List[List[int]]
         """
+        if not intervals:
+            return [newInterval]
+
+        res = []
+
+        idx = 0
+        while idx < len(intervals):
+            interval = intervals[idx]
+            if newInterval[1] < interval[0]:
+                res.append(newInterval)
+                break
+            elif newInterval[1] >= interval[0] and newInterval[1] <= interval[1]:
+                newInterval[0] = min(interval[0], newInterval[0])
+                newInterval[1] = interval[1]
+                res.append(newInterval)
+                idx += 1
+                break
+            elif newInterval[0] <= interval[1]:
+                newInterval[0] = min(interval[0], newInterval[0])
+                if idx == len(intervals) - 1:
+                    res.append(newInterval)
+                idx += 1
+            else:
+                res.append(interval)
+                if idx == len(intervals) - 1:
+                    res.append(newInterval)
+                idx += 1
+            
+
+        res.extend(intervals[idx:])
+
+        return res
         
+
+    @staticmethod
+    def main():
+        sol = Solution()
+        intervals = [[1,2],[3,5],[6,7],[8,10],[12,16]]
+        newInterval = [4,8]
+        print(sol.insert(intervals, newInterval))
+
+if __name__ == "__main__":
+    Solution.main() 
