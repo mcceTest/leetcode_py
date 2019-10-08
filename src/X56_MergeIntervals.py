@@ -21,4 +21,35 @@ class Solution(object):
         :type intervals: List[List[int]]
         :rtype: List[List[int]]
         """
+        if len(intervals) <= 1:
+            return intervals
+
+        intervals.sort()
+
+        res = []
+        mergedInterval = intervals[0][:]
+
+        for idx in range(1, len(intervals)):
+            curInterval = intervals[idx]
+            if curInterval[0] <= mergedInterval[1]:
+                mergedInterval[1] = curInterval[1]
+            else:
+                res.append(mergedInterval)
+                mergedInterval = curInterval[:]
+
+        res.append(mergedInterval)
+
+        return res
+
+
+    @staticmethod
+    def main():
+        sol = Solution()
+
+        intervals = [[1,3],[2,6],[8,10],[15,18]]
+
+        print(sol.merge(intervals))
         
+
+if __name__ == "__main__":
+    Solution.main()   
