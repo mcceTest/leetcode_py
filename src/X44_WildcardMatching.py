@@ -53,4 +53,49 @@ class Solution(object):
         :type p: str
         :rtype: bool
         """
+        sLen = len(s)
+        pLen = len(p)
+
+        if pLen == 0 and sLen > 0:
+            return False
+
+        dp = [ [False] * (sLen + 1) for _ in range(pLen + 1)]
+        dp[pLen][sLen] = True
+
+        for i in range(sLen):
+            dp[pLen][i] = False
+
+        for pIdx in range(pLen - 1, -1, -1):
+            for sIdx in range(sLen, -1, -1):
+                if sIdx == sLen:
+                    if p[pIdx] == '*':
+                        dp[pIdx][sIdx] = dp[pIdx + 1][sIdx]
+                    else:
+                        dp[pIdx][sIdx] = False
+                else:
+                    if p[pIdx] == '?':
+                        dp[pIdx][sIdx] = dp[pIdx + 1][sIdx + 1]
+                    elif p[pIdx] == '*':
+                        for i in range(sIdx, sLen + 1):
+                            if dp[pIdx + 1][i]:
+                                dp[pIdx][sIdx] = True
+                                break
+                    else:
+                        dp[pIdx][sIdx] = (p[pIdx] == s[sIdx] and dp[pIdx + 1][sIdx + 1])
+
+        return dp[0][0]
+
+
+
+    
+    @staticmethod
+    def main():
+        sol = Solution()
+
+        s = "aa"
+        p = "*"
+        print(sol.isMatch(s, p))
         
+
+if __name__ == "__main__":
+    Solution.main() 
