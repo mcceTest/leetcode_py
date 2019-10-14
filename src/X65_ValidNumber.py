@@ -36,4 +36,70 @@ class Solution(object):
         :type s: str
         :rtype: bool
         """
+        s = s.strip()
+
+        if len(s) == 0:
+            return False
+
+        eIdx = -1
+        for i, c in enumerate(s):
+            if c == ' ':
+                return False
+            elif c == 'e':
+                if eIdx != -1:
+                    return False
+                else:
+                    eIdx = i
+
+        if eIdx == -1:
+            return self.isSimpleNumer(s, 0, len(s) - 1)
+        else:
+            return self.isSimpleNumer(s, 0, eIdx - 1) and self.isSimpleNumer(s, eIdx + 1, len(s) - 1, False, True)
+
+    def isSimpleNumer(self, s, startIdx, endIdx, allowDot=True, needNum=True):
+        if startIdx > endIdx:
+            return False
+
+        numIdx = -1
+        dotFound = False
+
+        for i in range(startIdx, endIdx + 1):
+            c = s[i]
+            if c == '-' or c == '+':
+                if i != startIdx:
+                    return False
+            elif c == '.':
+                if not allowDot:
+                    return False
+
+                if dotFound or (numIdx == -1 and i == endIdx):
+                    return False
+                else:
+                    dotFound = True
+            elif ord(c) >= ord('0') and ord(c) <= ord('9'):
+                if numIdx == -1:
+                    numIdx = i
+            else:
+                return False
+
+        if needNum and numIdx == -1:
+            return False
+        else:
+            return True
+
+    @staticmethod
+    def main():
+        sol = Solution()
+        s = '0'
+        print(sol.isNumber(s))
         
+
+if __name__ == "__main__":
+    Solution.main() 
+            
+
+
+                
+                    
+
+                
