@@ -40,7 +40,7 @@ class TestSum(unittest.TestCase):
                 ['a']
                 ]
         word = "a"
-        self.assertFalse(sol.exist(board, word))
+        self.assertTrue(sol.exist(board, word))
 
 
 if __name__ == "__main__":

@@ -45,10 +45,10 @@ class Solution(object):
         return False
 
     def dfs(self, board, word, idx, used, i, j, nrow, ncol):
-        if idx == len(word):
-            return True
-
         if not used[i][j] and board[i][j] == word[idx]:
+            if idx == len(word) - 1:
+                return True
+                
             used[i][j] = True
             if j < ncol - 1:
                 if self.dfs(board, word, idx + 1, used, i, j + 1, nrow, ncol):
