@@ -27,11 +27,31 @@ class Solution(object):
         if head is None:
             return head
 
-        p1 = None
-        p2 = None
+        dummyHead = ListNode(-1)
+        dummyHead.next = head
+
+        pre = dummyHead
         cur = head
+        curLess = dummyHead
 
         while cur is not None:
+            if cur.val < x:
+                if cur == curLess.next:
+                    curLess = cur
+                    pre = cur
+                    cur = cur.next
+                else:
+                    pre.next = cur.next
+                    cur.next = curLess.next
+                    curLess.next = cur
+                    curLess = cur
+                    cur = pre.next
+            else:
+                pre = cur
+                cur = cur.next
+
+        return dummyHead.next
+
             
 
 
