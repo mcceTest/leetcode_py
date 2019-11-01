@@ -61,31 +61,45 @@ class Solution(object):
         if len(s1) != len(s2) or sorted(s1) != sorted(s2):
             return False
 
-        return self.isScrambleHelper(s1, s2, 0, len(s1) - 1, 0, len(s2) - 1)
+        cached = [ [ [ None ] * len(s1) for _ in range(len(s1))] for _ in range(len(s1))]
+        return self.isScrambleHelper(s1, s2, 0, 0, len(s1), cached)
 
 
-    def isScrambleHelper(self, s1, s2, start1, end1, start2, end2):
-        l = end1 - start1 + 1
-        if l <= 0:
+    def isScrambleHelper(self, s1, s2, start1, start2, sLen, cached):
+        if sLen <= 0:
             return True
 
-        if l == 1:
-            return s1[start1] == s2[start2]
+        if cached[start1][start2][sLen - 1] is not None:
+            return cached[start1][start2][sLen - 1]
+
+        res = False
+
+        if sLen == 1:
+            if s1[start1] == s2[start2]:
+                res = True
         else:
-            for i in range(l - 1):
-                if self.isScrambleHelper(s1, s2, start1, start1 + i, start2, start2 + i) and self.isScrambleHelper(s1, s2, start1 + i + 1, end1, start2 + i + 1, end2):
-                    return True
+            for i in range(1, sLen):
+                if self.isScrambleHelper(s1, s2, start1, start2, i, cached) and self.isScrambleHelper(s1, s2, start1 + i, start2 + i, sLen - i, cached):
+                    res = True
+                    break
 
-                if self.isScrambleHelper(s1, s2, start1, start1 + i, end2 - i, end2) and self.isScrambleHelper(s1, s2, start1 + i + 1, end1, start2, end2 - i - 1):
-                    return True
+                if self.isScrambleHelper(s1, s2, start1, start2 + (sLen - i), i, cached) and self.isScrambleHelper(s1, s2, start1 + i, start2, sLen - i, cached):
+                    res = True
+                    break
 
-        return False     
+        cached[start1][start2][sLen - 1] = res
+
+        return res     
 
     @staticmethod
     def main():
         sol = Solution()
         s1 = "abcdefghijklmnopq"
         s2 = "efghijklmnopqcadb"
+
+        s1 = "great"
+        s2 = "rgeat"
+        
         print(sol.isScramble(s1, s2))
 
         
