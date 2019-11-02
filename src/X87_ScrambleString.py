@@ -46,7 +46,7 @@ Input: s1 = "abcde", s2 = "caebd"
 Output: false
 '''
 
-
+## TODO: for each substr, count number of chars first
 
 class Solution(object):
     def isScramble(self, s1, s2):

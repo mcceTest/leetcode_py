@@ -36,4 +36,25 @@ class Solution(object):
         :type n: int
         :rtype: List[int]
         """
+        if n == 0:
+            return [0]
+        else:
+            res = []
+            pre = self.grayCode(n - 1)
+            res.extend(pre)
+            p = 2 ** (n - 1)
+            for num in reversed(pre):
+                res.append(num + p)
+
+            return res
         
+
+    @staticmethod
+    def main():
+        sol = Solution()
+        print(sol.grayCode(2))
+
+        
+
+if __name__ == "__main__":
+    Solution.main() 
