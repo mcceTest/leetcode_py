@@ -19,6 +19,15 @@ class TestSum(unittest.TestCase):
 
         self.assertIsNone(root.right.right)
 
+
+    def testToList1(self):
+        root = TreeNode(1)
+        root.right = TreeNode(2)
+        root.right.left = TreeNode(3)
+
+        self.assertListEqual(TreeNode.toList(root), [1, None, 2, 3])
+
+
 if __name__ == "__main__":
     import sys
     unittest.main()

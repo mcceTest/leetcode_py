@@ -37,3 +37,38 @@ class Solution(object):
         :rtype: List[TreeNode]
         """
         
+        if n <= 0:
+           return []
+
+        return self.helper(1, n)
+         
+
+    def helper(self, start, end):
+        if start > end:
+            return None
+        elif start == end:
+            return [TreeNode(start)]
+        else:
+            res = []
+            for idx in range(start, end + 1):
+                root = TreeNode(idx)
+                root.left = self.helper(start, idx - 1)
+                root.right = self.helper(idx + 1, end)
+
+            res.append(root)
+
+        return res
+
+   
+
+    @staticmethod
+    def main():
+        sol = Solution()
+        trees = sol.generateTrees(3)
+
+        for tree in trees:
+           print(tree)
+        
+
+if __name__ == "__main__":
+    Solution.main() 
