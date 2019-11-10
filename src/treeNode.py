@@ -57,17 +57,17 @@ class TreeNode(object):
                     res.append(None)
                 else:
                     res.append(n.val)
-                    curNodes.append(n.left)/
+                    curNodes.append(n.left)
                     curNodes.append(n.right)
 
-            while curNodes and curNodes[-1] is None:
-                curNodes.pop()
-
             preNodes = curNodes
+
+        while res and res[-1] is None:
+            res.pop()
 
         return res
 
     def __repr__(self):
-        return TreeNode.toList(self)
+        return str(TreeNode.toList(self))
 
     
