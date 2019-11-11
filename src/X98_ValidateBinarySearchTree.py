@@ -28,7 +28,7 @@ Input: [5,1,4,null,null,3,6]
 Output: false
 Explanation: The root node's value is 5 but its right child's value is 4.
 '''
-
+## TODO: Use inorder traversal
 from treeNode import TreeNode
 # Definition for a binary tree node.
 # class TreeNode(object):
@@ -36,11 +36,29 @@ from treeNode import TreeNode
 #         self.val = x
 #         self.left = None
 #         self.right = None
-
+import sys
 class Solution(object):
     def isValidBST(self, root):
         """
         :type root: TreeNode
         :rtype: bool
         """
-        
+        return self.dfs(root, -sys.maxsize - 1, sys.maxsize)
+
+    def dfs(self, root, minLimit, maxLimit):
+        if root is None:
+            return True
+
+        if root.val > minLimit and root.val < maxLimit and self.dfs(root.left, minLimit, root.val) and self.dfs(root.right, root.val, maxLimit):
+            return True
+
+        return False
+
+    @staticmethod
+    def main():
+        sol = Solution()
+        root = TreeNode.constructFromLevelList([5,1,4,None,None,3,6])
+        print(sol.isValidBST(root))
+
+if __name__ == "__main__":
+    Solution.main() 
