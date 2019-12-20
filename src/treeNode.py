@@ -70,4 +70,14 @@ class TreeNode(object):
     def __repr__(self):
         return str(TreeNode.toList(self))
 
+
+    @staticmethod
+    def isSameTree(tree1, tree2):
+        if tree1 is None:
+            return tree2 is None
+        if tree2 is None:
+            return False
+
+        return tree1.val == tree2.val and TreeNode.isSameTree(tree1.left, tree2.left) and TreeNode.isSameTree(tree1.right, tree2.right)
+
     

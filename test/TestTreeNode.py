@@ -28,6 +28,10 @@ class TestSum(unittest.TestCase):
         self.assertListEqual(TreeNode.toList(root), [1, None, 2, 3])
 
 
+    def testIsSameTree(self):
+        pass
+
+
 if __name__ == "__main__":
     import sys
     unittest.main()
