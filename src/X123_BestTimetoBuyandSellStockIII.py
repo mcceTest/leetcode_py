@@ -32,12 +32,47 @@ class Solution(object):
         :type prices: List[int]
         :rtype: int
         """
+        if len(prices) < 2:
+            return 0
+
+        leftMaxProfit = [0] * len(prices)
+        rightMaxProfit = [0] * len(prices)
+
+        maxProfit = 0
+        curMin = prices[0]
+        for i, price in enumerate(prices):
+            if price > curMin:
+                profit = price - curMin
+                if profit > maxProfit:
+                    maxProfit = profit
+            else:
+                curMin = price
+            leftMaxProfit[i] = maxProfit
+
+        maxProfit = 0
+        curMax = prices[-1]
+        for i in range(len(prices) - 2, -1, -1):
+            price = prices[i]
+            if price < curMax:
+                profit = curMax - price
+                if profit > maxProfit:
+                    maxProfit = profit
+            else:
+                curMax = price
+            rightMaxProfit[i] = maxProfit
+
+        maxProfit = 0
+        for i in range(len(prices)):
+            maxProfit = max(maxProfit, leftMaxProfit[i] + rightMaxProfit[i])
+
+        return maxProfit
+
         
 
     @staticmethod
     def main():
         sol = Solution()
-        prices = [7,1,5,3,6,4]
+        prices = [3,3,5,0,0,3,1,4]
         print(sol.maxProfit(prices))
 
 
