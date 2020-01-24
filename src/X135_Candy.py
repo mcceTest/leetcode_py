@@ -27,15 +27,40 @@ class Solution(object):
         :type ratings: List[int]
         :rtype: int
         """
-        
+        if not ratings:
+            return 0
+
+
+        '''
+                  * 
+              *       *          *  
+           *              *   *      *
+        *                                *
+                                            *
+
+        ---------------------------------------------
+        1. points at the valeys should be 1
+        2. points at the peaks are decided by both sides
+        3. points between valey and peak are easy to decide ( increment by 1)
+        '''
+
+        candies = [1] * len(ratings)
+        for i in range(1, len(ratings)):
+            if ratings[i] > ratings[i - 1]:
+                candies[i] = candies[i - 1] + 1
+
+        for i in range(len(ratings) - 2, -1, -1):
+            if ratings[i] > ratings[i + 1] and candies[i] < candies[i+1] + 1:
+                candies[i] = candies[i+1] + 1
+
+        return sum(candies)
 
 
     @staticmethod
     def main():
         sol = Solution()
-        gas  = [1,2,3,4,5]
-        cost = [3,4,5,1,2]
-        print(sol.canCompleteCircuit(gas, cost))
+        ratings = [1,0,2]
+        print(sol.candy(ratings))
 
 
 if __name__ == "__main__":

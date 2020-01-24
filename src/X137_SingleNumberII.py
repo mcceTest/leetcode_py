@@ -22,7 +22,7 @@ class Solution(object):
         :type nums: List[int]
         :rtype: int
         """
-        sum1 = sum(nums)
+        
         
 
     @staticmethod
