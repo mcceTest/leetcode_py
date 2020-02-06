@@ -27,10 +27,14 @@ class Solution(object):
         if head is None or head.next is None:
             return head
 
+        # 1. split the list into two
         firstHead, secondHead = self.splitList(head)
+
+        # 2. sort the 2 sub lists
         firstHead = self.sortList(firstHead)
         secondHead = self.sortList(secondHead)
 
+        # 3. merge the 2 sorted lists
         return self.mergeList(firstHead, secondHead)
 
     def splitList(self, head):

@@ -29,7 +29,16 @@ class Solution(object):
         :rtype: List[int]
         """
         res = []
-        self.postorderTraversalHelper(root, res)
+        
+        st = [root]
+        while st:
+            cur = st.pop(-1)
+            while cur:
+                res.append(cur.val)
+                if cur.left is not None:
+                    st.append(cur.left)
+                cur = cur.right
+        res.reverse()
 
         return res
 
