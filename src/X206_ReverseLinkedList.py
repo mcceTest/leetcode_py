@@ -34,10 +34,12 @@ class Solution(object):
             return head, head
 
         tail = head
-        tail.next = None
+        
         newHead, newTail = self.helper(head.next)
         if newTail is not None:
             newTail.next = tail
+
+        tail.next = None
 
         return newHead, tail
 
