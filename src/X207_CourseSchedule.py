@@ -37,6 +37,47 @@ class Solution(object):
             return True
 
         g, indegree = self.adjList(numCourses, prerequisites)
+        visited = [False] * numCourses
+        # track dfs track
+        recStack = [False] * numCourses
+
+        for i in range(numCourses):
+            if not self.dfs(i, g, numCourses, recStack, visited):
+                return False
+
+        return True
+
+    
+    def dfs(self, cur, g, numCourses, recStack, visited):
+        '''check if there is cycle starting from node cur.
+        '''
+        if visited[cur]:
+            return True
+
+        if recStack[cur]:
+            return False
+
+        recStack[cur] = True
+        for neig in g[cur]:
+            if not self.dfs(neig, g, numCourses, recStack, visited):
+                return False
+        recStack[cur] = False
+        visited[cur] = True
+
+        return True
+
+
+
+    def canFinish3(self, numCourses, prerequisites):
+        """
+        :type numCourses: int
+        :type prerequisites: List[List[int]]
+        :rtype: bool
+        """
+        if numCourses == 0 or not prerequisites:
+            return True
+
+        g, indegree = self.adjList(numCourses, prerequisites)
 
         for _ in range(numCourses):
             # find one node with indegree 0 and remove it
@@ -54,8 +95,6 @@ class Solution(object):
                 indegree[neig] -= 1
 
         return True
-
-
 
     def canFinish2(self, numCourses, prerequisites):
         """
