@@ -3,3 +3,5 @@ launch.json
 .env
 src/__pycache__/*
 test/__pycache__/*
+.vscode
+.DS_Store

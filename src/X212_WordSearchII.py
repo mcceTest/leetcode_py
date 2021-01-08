@@ -63,7 +63,7 @@ class Trie(object):
         node.word = word
 
     
-## TODO: dfs search the board using the trie
+## TODO: dfs search the board using the trie, which helps with pruning when backtracking
 class Solution(object):
     def findWords(self, board, words):
         """
